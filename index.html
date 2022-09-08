@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <!-- Materialize CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Fontawesome 6 CND-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <nav class="pink">
+          <div class="nav-wrapper"></div>
+        </nav>
+
+        <!-- Barra de Pesquisa  -->
+
+        <input placeholder="Pesquisar" v-show="!modoAdicionar && !modoEditar" ><i></i></input>
+
+<!--     -->
+
+        <div class="container" v-show="!modoAdicionar && !modoEditar">
+          <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+              <!-- card de tarefa que repete para cada item do array -->
+              <div v-for="tarefa in tasks" class="card horizontal">
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p>{{ tarefa.title }}</p>
+                    <span class="projeto">{{ tarefa.project }}</span>
+                  </div>
+                  <div class="card-action pink lighten-5">
+                    <button @click="abrirEditar(tarefa.id)">Editar</button>
+                    <button @click="excluir(tarefa.id)">excluir</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--auqi-->
+
+      <!-- adicionar -->
+      <div class="container" v-show="modoAdicionar">
+        <input
+          type="text"
+          class="input"
+          placeholder="Tarefa"
+          v-model="criacao.title"
+        />
+        <input
+          type="text"
+          class="input"
+          placeholder="Descrição"
+          v-model="criacao.user"
+        />
+        <input
+          type="text"
+          class="input"
+          placeholder="projeto"
+          v-model="criacao.project"
+        />
+        <input
+          type="datetime-local"
+          class="input"
+          placeholder="data"
+          v-model="criacao.dueTo"
+        />
+        <button @click="salvar">Salvar</button>
+      </div>
+      <!-- FIM Adicionar -->
+
+      <!-- Início Editar -->
+      <div class="container" v-show="modoEditar">
+        <input
+          type="text"
+          class="input"
+          placeholder="Tarefa"
+          v-model="criacao.title"
+        />
+        <input
+          type="text"
+          class="input"
+          placeholder="Descrição"
+          v-model="criacao.user"
+        />
+        <input
+          type="text"
+          class="input"
+          placeholder="projeto"
+          v-model="criacao.project"
+        />
+        <input
+          type="datetime-local"
+          class="input"
+          placeholder="data"
+          v-model="criacao.dueTo"
+        />
+        <button @click="salvarEditar">Salvar Edição</button>
+      </div>
+
+      <!-- FIM Editar -->
+
+      <!-- Início adicionar -->
+      <div class="add">
+        <a
+          class="btn-floating btn-large waves-effect waves-light pink halfway-fab bottom-sheet"
+          @click="criarNovaTask"
+          ><i class="fa-solid fa-plus"></i
+        ></a>
+      </div>
+    </div>
+
+    <!-- fim adicionar -->
+
+    ​
+    <!-- Materialize JavaScript CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    ​
+    <script src="./todo.js"></script>
+  </body>
+</html>
